@@ -24,7 +24,7 @@ public class GoogleAuthCodeRequestUrlProvider implements AuthCodeRequestUrlProvi
                 .queryParam("response_type", "code")
                 .queryParam("client_id", googleOauthConfig.clientId())
                 .queryParam("redirect_uri", googleOauthConfig.redirectUri())
-                .queryParam("state", "samplestate") // 이건 나중에 따로 찾아보고 설정해서 쓰세용!
+                .queryParam("scope", googleOauthConfig.scope())
                 .build()
                 .toUriString();
     }

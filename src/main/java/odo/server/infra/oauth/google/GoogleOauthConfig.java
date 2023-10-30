@@ -7,7 +7,7 @@ public record GoogleOauthConfig(
         String redirectUri,
         String clientId,
         String clientSecret,
-        String[] scope,
+        String scope,
         String state
 ) {
 }

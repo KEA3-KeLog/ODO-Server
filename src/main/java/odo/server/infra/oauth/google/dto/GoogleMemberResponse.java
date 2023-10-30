@@ -9,31 +9,19 @@ import static odo.server.domain.OauthServerType.GOOGLE;
 
 @JsonNaming(value = SnakeCaseStrategy.class)
 public record GoogleMemberResponse(
-        String resultcode,
-        String message,
-        Response response
+        String id,
+        String name,
+        String email,
+        String picture
 ) {
 
     public OauthMember toDomain() {
         return OauthMember.builder()
-                .oauthId(new OauthId(String.valueOf(response.id), GOOGLE))
-                .nickname(response.nickname)
-                .profileImageUrl(response.profileImage)
+                .oauthId(new OauthId(id, GOOGLE))
+                .nickname(name)
+                .profileImageUrl(picture)
+                .email(email)
                 .build();
     }
 
-    @JsonNaming(value = SnakeCaseStrategy.class)
-    public record Response(
-            String id,
-            String nickname,
-            String name,
-            String email,
-            String gender,
-            String age,
-            String birthday,
-            String profileImage,
-            String birthyear,
-            String mobile
-    ) {
-    }
 }

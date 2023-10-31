@@ -17,7 +17,7 @@ public interface KakaoApiClient {
     // contentType 은 Access token 요청 시 필요한 요청 헤더 입니다.
     // 응답 값은 KakaoToken을 통해 객체로 바로 받아올 수 있습니다.
     @PostExchange(url = "https://kauth.kakao.com/oauth/token", contentType = APPLICATION_FORM_URLENCODED_VALUE)
-    KakaoToken fetchToken(@RequestParam MultiValueMap<String, String> params);
+    KakaoToken fetchToken(@RequestParam(name="params") MultiValueMap<String, String> params);
 
     //  AccessToken을 통해 사용자 정보를 받아와 OauthMember를 생성
     //  AccessToken을 통해 회원 정보를 조회하는 기능입니다.

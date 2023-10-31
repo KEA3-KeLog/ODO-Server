@@ -8,6 +8,7 @@ import odo.server.application.OauthService;
 import odo.server.domain.BlogInfoOauthMember;
 import odo.server.domain.OauthMember;
 import odo.server.domain.OauthServerType;
+import odo.server.post.Post;
 import org.apache.tomcat.util.json.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RequestMapping("/oauth")
@@ -27,7 +29,6 @@ import java.util.List;
 public class OauthController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final OauthService oauthService;
-    private ObjectMapper objectMapper = new ObjectMapper();
 
     // 사용자가 프론트엔드를 통해 /oauth/kakao로 접속하면 아래 메서드가 실행됩니다.
     // 이때 kakao는 OauthServerType.KAKAO로 변환될 것입니다.
@@ -68,4 +69,11 @@ public class OauthController {
         oauthService.insertBlogInfo(userBlogData.getId(), userBlogData.getUserBlogName(), userBlogData.getUserBlogAddress(), userBlogData.getUserBlogNickname());
     }
 
+    @GetMapping("/api/user/{userId}")
+    public Map<String, Object> getUserByUserId(
+            @PathVariable Long userId) {
+
+
+        return oauthService.selectByUserId(userId);
+    }
 }

@@ -7,8 +7,15 @@ import odo.server.domain.OauthMemberRepository;
 import odo.server.domain.OauthServerType;
 import odo.server.domain.authcode.AuthCodeRequestUrlProviderComposite;
 import odo.server.domain.client.OauthMemberClientComposite;
+import odo.server.post.Post;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -44,36 +51,36 @@ public class OauthService {
         return array;
     }
 
-    // 프론트엔드에서 받아온 추가 정보를 OauthMember에 입력합니다.
-//    public String insertBlogInfo(Long id, String userBlogName, String userBlogAddress, String userBlogNickName) {
-//        String sql = "UPDATE oauth_member SET blog_name=?, blog_address=?, blog_nickname=? WHERE id=?";
-//        Object[] params = {userBlogName, userBlogAddress, userBlogNickName, id};
-//        jdbcTemplate.update(sql, params);
-//        System.out.println("insert Called");
-//
-//
-//        return "insert Called";
-//    }
-
-    // 변경사항
     public String insertBlogInfo(Long id, String userBlogName, String userBlogAddress, String userBlogNickName) {
-//        // db.odo_user.update({조건})
-//        Criteria criteria = new Criteria("id");
-//        criteria.is(id);
-//
-//        Query query = new Query();
-//        // 업데이트 할 항목 정의
-//        Update update = new Update();
-//        update.set("blog_name", userBlogName);
-//        update.set("blog_address", userBlogAddress);
-//        update.set("blog_nickname", userBlogNickName);
-
         String sql = "UPDATE oauth_member SET blog_name=?, blog_address=?, blog_nickname=? WHERE id=?";
         Object[] params = {userBlogName, userBlogAddress, userBlogNickName, id};
         jdbcTemplate.update(sql, params);
-        System.out.println("insert Called");
+
+        return "insert ok";
+    }
+
+    // db에서 userId 를 기준으로 db를 조회하여 정보를 가져옵니다.
+    public Map<String, Object> selectByUserId(Long userId) {
+//        String[] array = new String[3];
+        String sql = "SELECT blog_nickname, email, blog_name FROM oauth_member WHERE id=?";
+//        String sql = "SELECT blog_nickname,email, profile_img_url FROM oauth_member WHERE id=?";
+
+        Map<String, Object> params = new HashMap<>();
+//        params.put(userId);
+
+//        namedParameterJdbcTemplate.queryForList(sql, params);
+
+        // Select One Row
+        Map<String, Object> result = jdbcTemplate.queryForMap(sql, userId);
 
 
-        return "insert Called";
+//        String[] array = new String[3];
+//        array[0] = saved.blogNickname();
+//        array[1] = saved.profileImageUrl();
+//        array[2] = saved.email();
+
+        System.out.println("*********************************");
+        System.out.println(result);
+        return result;
     }
 }

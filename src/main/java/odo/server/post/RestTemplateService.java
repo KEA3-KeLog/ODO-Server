@@ -18,7 +18,7 @@ public class RestTemplateService {
     public static String summary(String args) {
         // KoGPT API 호출을 위한 메서드 호출
         args = args + "\n한줄 요약:"; 
-        Map<String, Object> response = kogptApi(args, 60, 0.1, 0.3);
+        Map<String, Object> response = kogptApi(args, 100, 0.1, 0.1);
         String sum = "";
 
         // response에서 generations 키의 값을 추출

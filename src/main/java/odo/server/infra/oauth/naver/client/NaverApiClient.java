@@ -12,7 +12,7 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 public interface NaverApiClient {
     @PostExchange(url = "https://nid.naver.com/oauth2.0/token")
-    NaverToken fetchToken(@RequestParam MultiValueMap<String, String> params);
+    NaverToken fetchToken(@RequestParam(name="params") MultiValueMap<String, String> params);
 
     @GetExchange("https://openapi.naver.com/v1/nid/me")
     NaverMemberResponse fetchMember(@RequestHeader(name = AUTHORIZATION) String bearerToken);

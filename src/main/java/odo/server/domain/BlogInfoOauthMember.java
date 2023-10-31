@@ -1,19 +1,18 @@
 package odo.server.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class BlogInfoOauthMember {
     private String email;
     private Long id;
     private String userBlogName;
     private String userBlogNickname;
     private String userBlogAddress;
-
-    public BlogInfoOauthMember(String email, Long id, String userBlogName, String userBlogNickname, String userBlogAddress) {
-        this.email = email;
-        this.id = id;
-        this.userBlogName = userBlogName;
-        this.userBlogNickname = userBlogNickname;
-        this.userBlogAddress = userBlogAddress;
-    }
 
     public String getEmail(){
         return email;

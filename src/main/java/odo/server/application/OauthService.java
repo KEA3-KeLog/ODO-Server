@@ -65,7 +65,7 @@ public class OauthService {
         String sql = "SELECT blog_nickname, email, blog_name FROM oauth_member WHERE id=?";
 //        String sql = "SELECT blog_nickname,email, profile_img_url FROM oauth_member WHERE id=?";
 
-        Map<String, Object> params = new HashMap<>();
+        // Map<String, Object> params = new HashMap<>();
 //        params.put(userId);
 
 //        namedParameterJdbcTemplate.queryForList(sql, params);

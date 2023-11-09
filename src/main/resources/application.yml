@@ -3,7 +3,9 @@ spring:
     url: jdbc:mysql://localhost:3306/spring_social?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root
     password: 1q2w3e4r
-
+  servlet:
+    multipart: 
+      max-file-size: 20MB  #최대 파일 사이즈를 20MB로 지정
   jpa:
     show-sql: true
     properties:

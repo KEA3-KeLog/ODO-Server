@@ -30,6 +30,9 @@ public class Image {
     @Column(name = "image_id")
     private Integer imageId;
 
+    @Column(name = "post_key")
+    private Integer postKey;
+
     @Column(name = "file_ori_name")
     private String fileOriName;
 

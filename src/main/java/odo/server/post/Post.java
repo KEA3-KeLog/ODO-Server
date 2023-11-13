@@ -30,6 +30,9 @@ public class Post {
     @Column(name = "post_id")
     private Integer postId;
 
+    @Column(name = "post_key")
+    private Integer postKey;
+
     @Column(name = "title")
     private String title;
 
@@ -56,6 +59,7 @@ public class Post {
 
     @Column(name = "counts")
     private Integer counts;
+
     // 생성자, 게터, 세터 생략
 
 }

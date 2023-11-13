@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @Service
 public class PostService {
 
 	@Autowired
 	private PostRepository postRepository;
 	private RestTemplateService restTemplateService;
+
 	// get posts data
 	public List<Post> getAllPost() {
 		return postRepository.findAll();
@@ -25,6 +28,12 @@ public class PostService {
 	public String createPost(Post post) {
 		post.setSummary(restTemplateService.summary(post.getContents()));
 		postRepository.save(post);
+		// ObjectMapper objectMapper = new ObjectMapper();
+		// try{
+		// 	String[] imageList = objectMapper.readValue(post.getImageListString(), String[].class);
+		// } catch (Exception e) {
+		// 	e.printStackTrace();
+		// }
 		return Integer.toString(post.getPostId());
 	}
 

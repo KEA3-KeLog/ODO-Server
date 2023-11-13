@@ -34,7 +34,8 @@ public class ImageController {
 
     // create post
     @PostMapping("/image")
-    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file,
+            @RequestParam("postKey") String postKey) {
         try {
             // 파일 저장 경로 지정
             String directory = "./"; // 실제 서버의 파일 디렉터리 경로로 변경해야 합니다.
@@ -48,6 +49,7 @@ public class ImageController {
 
             // 파일 정보 DB에 저장
             Image image = new Image();
+            image.setPostKey(Integer.parseInt(postKey));
             image.setFileOriName(fileOriName);
             image.setFileNewName(fileNewName);
             imageService.saveImage(image);
@@ -61,8 +63,7 @@ public class ImageController {
     }
 
     @GetMapping("/image/{fileNewName}")
-    public ResponseEntity<Resource> getImageByName(
-            @PathVariable String fileNewName) {
+    public ResponseEntity<Resource> getImageByName(@PathVariable String fileNewName) {
         try {
             String directory = "./";
             Path filePath = Paths.get(directory + fileNewName);
@@ -72,8 +73,9 @@ public class ImageController {
                 throw new FileNotFoundException("File not found: " + fileNewName);
             }
             return ResponseEntity.ok(resource);
-                    // .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-                    // .body(resource);
+            // .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" +
+            // resource.getFilename() + "\"")
+            // .body(resource);
         } catch (MalformedURLException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -81,5 +83,11 @@ public class ImageController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+    @GetMapping("/image/thumbnail/{postKey}")
+    public ResponseEntity<String> getImageByPostKey(@PathVariable Integer postKey) {
+        String fileNewName = imageService.getImageByPostKey(postKey);
+        return ResponseEntity.ok(fileNewName);
     }
 }

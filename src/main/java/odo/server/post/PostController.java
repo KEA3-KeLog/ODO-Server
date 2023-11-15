@@ -50,25 +50,31 @@ public class PostController {
 	public List<Object> getPostsAndImagesByUserId(@PathVariable Integer userId) {
 		List<Post> posts = postService.getPostByUserId(userId);
 		List<Object> result = new ArrayList<>();
-
+	
 		for (Post post : posts) {
 			Integer postKey = post.getPostKey();
 			System.out.println(postKey);
 			String imageName = imageService.getImageByPostKey(postKey);
-			// Map<String, String> imageInfo = new HashMap<>();
-			// imageInfo.put("imageNewName", imageName);
-
-			// Create a new object with Post and image information
+	
+			// 원하는 구조의 새로운 맵 생성
 			Map<String, Object> postWithImage = new HashMap<>();
-			postWithImage.put("post", post);
-			// postWithImage.put("imageInfo", imageInfo);
+			postWithImage.put("postId", post.getPostId());
+			postWithImage.put("postKey", post.getPostKey());
+			postWithImage.put("title", post.getTitle());
+			postWithImage.put("tag", post.getTag());
+			postWithImage.put("summary", post.getSummary());
+			postWithImage.put("contents", post.getContents());
+			postWithImage.put("createdTime", post.getCreatedTime());
+			postWithImage.put("updatedTime", post.getUpdatedTime());
+			postWithImage.put("userId", post.getUserId());
+			postWithImage.put("likes", post.getLikes());
+			postWithImage.put("counts", post.getCounts());
 			postWithImage.put("fileNewName", imageName);
-
+	
 			result.add(postWithImage);
 		}
 		return result;
 	}
-
 	// create post
 	@PostMapping("/post")
 	public String createPost(@RequestBody Post post) {

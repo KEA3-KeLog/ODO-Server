@@ -8,16 +8,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -62,6 +55,7 @@ public class PostController {
 			postWithImage.put("postKey", post.getPostKey());
 			postWithImage.put("title", post.getTitle());
 			postWithImage.put("tag", post.getTag());
+			postWithImage.put("tagList", post.getTagList());
 			postWithImage.put("summary", post.getSummary());
 			postWithImage.put("contents", post.getContents());
 			postWithImage.put("createdTime", post.getCreatedTime());
@@ -87,4 +81,15 @@ public class PostController {
 
 		return postService.getPost(postId);
 	}
+
+	@PutMapping("/post/{postId}")
+	public ResponseEntity<Post> updatePost(@PathVariable Integer postId, @RequestBody Post updatedPost) {
+		return postService.updatePost(postId, updatedPost);
+	}
+
+	@DeleteMapping("/post/{postId}")
+	public ResponseEntity<?> deletePost(@PathVariable Integer postId) {
+		return postService.deletePost(postId);
+	}
+
 }

@@ -1,12 +1,9 @@
 package odo.server.post;
 
 import java.util.Date;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
+import java.util.List;
+
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -59,6 +56,11 @@ public class Post {
 
     @Column(name = "counts")
     private Integer counts;
+
+    @ElementCollection
+    @CollectionTable(name = "post_tags", joinColumns = @JoinColumn(name = "post_id"))
+    @Column(name = "tag")
+    private List<String> tagList;
 
     // 생성자, 게터, 세터 생략
 

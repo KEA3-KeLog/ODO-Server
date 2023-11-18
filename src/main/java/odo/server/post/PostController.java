@@ -29,11 +29,6 @@ public class PostController {
 	private PostService postService;
 	private final ImageService imageService;
 
-	@GetMapping(value = "/")
-	public String home() {
-		return "GCU OK";
-	}
-
 	// get all post
 	@GetMapping("/post")
 	public List<Post> getAllPost() {

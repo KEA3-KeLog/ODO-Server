@@ -38,7 +38,7 @@ public class ImageController {
             @RequestParam("postKey") String postKey) {
         try {
             // 파일 저장 경로 지정
-            String directory = "./images/"; // 실제 서버의 파일 디렉터리 경로로 변경해야 합니다.
+            String directory = "./image/"; // 실제 서버의 파일 디렉터리 경로로 변경해야 합니다.
             String fileOriName = file.getOriginalFilename();
             String fileNewName = (new Date().getTime()) + "" + (new Random().ints(1000, 9999).findAny().getAsInt())
                     + ".png"; // 현재 날짜와 랜덤 정수값으로 새로운 파일명 만들기
@@ -65,12 +65,12 @@ public class ImageController {
     @GetMapping("/image/{fileNewName}")
     public ResponseEntity<Resource> getImageByName(@PathVariable String fileNewName) {
         try {
-            String directory = "./images/";
+            String directory = "./image/";
             Path filePath = Paths.get(directory + fileNewName);
             Resource resource = new UrlResource(filePath.toUri());
             // 파일이 존재하는지 확인 + 없으면 error.png
             if (!resource.exists()) {
-                Path errorFilePath = Paths.get( "./error.png");
+                Path errorFilePath = Paths.get( "./image/error.png");
                 Resource errorResource = new UrlResource(errorFilePath.toUri());
 
                 if (errorResource.exists()) {

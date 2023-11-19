@@ -31,12 +31,6 @@ public class PostService {
 	public String createPost(Post post) {
 		post.setSummary(restTemplateService.summary(post.getContents()));
 		postRepository.save(post);
-		// ObjectMapper objectMapper = new ObjectMapper();
-		// try{
-		// 	String[] imageList = objectMapper.readValue(post.getImageListString(), String[].class);
-		// } catch (Exception e) {
-		// 	e.printStackTrace();
-		// }
 		return Integer.toString(post.getPostId());
 	}
 

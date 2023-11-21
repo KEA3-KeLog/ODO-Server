@@ -1,7 +1,10 @@
 package odo.server.presentation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import odo.server.application.OauthService;
@@ -26,6 +29,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/oauth")
 @RestController
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class OauthController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final OauthService oauthService;
@@ -50,10 +54,14 @@ public class OauthController {
     // 프론트엔드는 이때 code를 받아서 http://localhost:8080/oauth/login/kakao로 보냅니다.
     @GetMapping("/login/{oauthServerType}")
     ResponseEntity<String[]> login(
+            HttpServletRequest request,
             @PathVariable OauthServerType oauthServerType,
             @RequestParam("code") String code
     ) {
         String[] login = oauthService.login(oauthServerType, code);
+        // HttpSession session =request.getSession(true);
+        // session.setAttribute("userId", login[2]);
+        // System.out.println("id : " + session.getAttribute("userId"));
         return ResponseEntity.ok(login);
     }
 

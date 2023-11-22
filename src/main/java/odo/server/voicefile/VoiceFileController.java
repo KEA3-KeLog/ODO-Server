@@ -51,7 +51,7 @@ public class VoiceFileController {
 
             // 파일 정보 DB에 저장
             VoiceFile newvoicefile = new VoiceFile();
-            newvoicefile.setFileId(Integer.parseInt(userId));
+            newvoicefile.setUserId(Integer.parseInt(userId));
             newvoicefile.setFileOriName(fileOriName);
             newvoicefile.setFileNewName(fileNewName);
             voiceFileService.saveVoiceFile(newvoicefile);

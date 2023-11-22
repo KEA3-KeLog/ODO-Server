@@ -29,7 +29,7 @@ public class JwtTokenizer {
     /**
      * AccessToken 생성
      */
-    public String createAccessToken(String id, String email) {
+    public String createAccessToken(Long id, String email) {
         return createToken(id, email, ACCESS_TOKEN_EXPIRE_COUNT, accessSecret);
     }
 
@@ -37,12 +37,12 @@ public class JwtTokenizer {
      * RefreshToken 생성
      */
 
-    public String createRefreshToken(String id, String email) {
+    public String createRefreshToken(Long id, String email) {
         return createToken(id, email,  REFRESH_TOKEN_EXPIRE_COUNT, refreshSecret);
     }
 
 
-    private String createToken(String id, String email, Long expire, byte[] secretKey) {
+    private String createToken(Long id, String email, Long expire, byte[] secretKey) {
         Claims claims = Jwts.claims().setSubject(email);
 
         claims.put("email", email);

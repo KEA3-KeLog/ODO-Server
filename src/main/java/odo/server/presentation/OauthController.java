@@ -12,6 +12,7 @@ import odo.server.application.OauthService;
 import odo.server.domain.BlogInfoOauthMember;
 import odo.server.domain.OauthMember;
 import odo.server.domain.OauthServerType;
+import odo.server.dto.MemberLoginResponseDto;
 import odo.server.post.Post;
 import org.apache.tomcat.util.json.JSONParser;
 import org.slf4j.Logger;
@@ -19,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,7 +57,7 @@ public class OauthController {
     // 프론트엔드로 Redirect되며,
     // 프론트엔드는 이때 code를 받아서 http://localhost:8080/oauth/login/kakao로 보냅니다.
     @GetMapping("/login/{oauthServerType}")
-    ResponseEntity<String[]> login(
+    ResponseEntity login(
             HttpServletRequest request,
             @PathVariable OauthServerType oauthServerType,
             @RequestParam("code") String code
@@ -65,12 +67,20 @@ public class OauthController {
         // session.setAttribute("userId", login[2]);
         // System.out.println("id : " + session.getAttribute("userId"));
 
-        String accessToken = jwtTokenizer.createAccessToken(login[2],login[0]);
+        String accessToken = jwtTokenizer.createAccessToken(Long.parseLong(login[2]),login[0]);
         System.out.println("accessToken = " + accessToken);
-        String refreshToken = jwtTokenizer.createRefreshToken(login[2],login[0]);
+        String refreshToken = jwtTokenizer.createRefreshToken(Long.parseLong(login[2]),login[0]);
         System.out.println("refreshToken = " + refreshToken);
 
-        return ResponseEntity.ok(login);
+        MemberLoginResponseDto memberloginresponse = MemberLoginResponseDto.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .memberId(Long.parseLong(login[2]))
+                .blogName(login[1])
+                .email(login[0])
+                .build();
+
+        return new ResponseEntity(memberloginresponse, HttpStatus.OK);
     }
 
 

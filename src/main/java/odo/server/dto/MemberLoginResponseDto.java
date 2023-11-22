@@ -14,5 +14,6 @@ public class MemberLoginResponseDto {
     private String refreshToken;
 
     private Long memberId;
-    private String nickname;
+    private String email;
+    private String blogName;
 }

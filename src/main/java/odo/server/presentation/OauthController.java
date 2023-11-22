@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import odo.server.JwtTokenizer;
 import odo.server.application.OauthService;
 import odo.server.domain.BlogInfoOauthMember;
 import odo.server.domain.OauthMember;
@@ -33,6 +34,7 @@ import java.util.Map;
 public class OauthController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final OauthService oauthService;
+    private final JwtTokenizer jwtTokenizer;
 
     // 사용자가 프론트엔드를 통해 /oauth/kakao로 접속하면 아래 메서드가 실행됩니다.
     // 이때 kakao는 OauthServerType.KAKAO로 변환될 것입니다.
@@ -62,6 +64,12 @@ public class OauthController {
         // HttpSession session =request.getSession(true);
         // session.setAttribute("userId", login[2]);
         // System.out.println("id : " + session.getAttribute("userId"));
+
+        String accessToken = jwtTokenizer.createAccessToken(login[2],login[0]);
+        System.out.println("accessToken = " + accessToken);
+        String refreshToken = jwtTokenizer.createRefreshToken(login[2],login[0]);
+        System.out.println("refreshToken = " + refreshToken);
+
         return ResponseEntity.ok(login);
     }
 

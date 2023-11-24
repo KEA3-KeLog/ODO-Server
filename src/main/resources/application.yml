@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/spring_social?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/spring_social
     username: root
     password: 1111
   servlet:
@@ -13,6 +13,7 @@ spring:
         format_sql: true
         use_sql_comments: true
         highlight_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
 
     hibernate:
       ddl-auto: update

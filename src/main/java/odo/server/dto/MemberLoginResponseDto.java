@@ -16,4 +16,5 @@ public class MemberLoginResponseDto {
     private Long memberId;
     private String email;
     private String blogName;
+    private String nickName;
 }

@@ -46,11 +46,17 @@ public class OauthService {
         // 만약 가입되어있지 않다면 저장(회원가입)합니다.
         OauthMember saved = oauthMemberRepository.findByOauthId(oauthMember.oauthId())
                 .orElseGet(() -> oauthMemberRepository.save(oauthMember));
-        String[] array = new String[3];
+        String[] array = new String[4];
+        //이메일 겨져옴
         array[0] = saved.email();
+        //블로그 이름 가져옴
         array[1] = saved.blogName();
+
         // id 를 함께 넘겨주는 이유는 db 조회 시 id 를 사용하기 위함
         array[2] = String.valueOf(saved.id());
+
+        // 사용자 닉네임 가져옴
+        array[3] = saved.nickname();
 
         return array;
     }

@@ -68,14 +68,13 @@ public class OauthController {
         // System.out.println("id : " + session.getAttribute("userId"));
 
         String accessToken = jwtTokenizer.createAccessToken(Long.parseLong(login[2]),login[0]);
-        System.out.println("accessToken = " + accessToken);
         String refreshToken = jwtTokenizer.createRefreshToken(Long.parseLong(login[2]),login[0]);
-        System.out.println("refreshToken = " + refreshToken);
 
         MemberLoginResponseDto memberloginresponse = MemberLoginResponseDto.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .memberId(Long.parseLong(login[2]))
+                .nickName(login[3])
                 .blogName(login[1])
                 .email(login[0])
                 .build();

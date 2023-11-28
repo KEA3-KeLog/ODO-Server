@@ -1,4 +1,4 @@
-package odo.server.store.DTO;
+package odo.server.store.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,17 +6,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class User {
+public class UserPoint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int point;
+    private int point = 10000;
 
-    public User() {
+    public UserPoint() {
     }
 
-    public User(int point) {
+    public UserPoint(int point) {
         this.point = point;
     }
 

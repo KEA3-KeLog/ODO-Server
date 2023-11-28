@@ -1,4 +1,4 @@
-package odo.server.store.DTO;
+package odo.server.store.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

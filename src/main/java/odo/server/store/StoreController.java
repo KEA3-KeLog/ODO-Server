@@ -1,25 +1,23 @@
 package odo.server.store;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
-import odo.server.store.DTO.Inven;
-import odo.server.store.DTO.Item;
-import odo.server.store.DTO.User;
+import odo.server.domain.OauthMemberRepository;
+import odo.server.store.domain.Inven;
+import odo.server.store.domain.Item;
+import odo.server.store.domain.UserPoint;
 import odo.server.store.repository.InventoryRepository;
 import odo.server.store.repository.ItemRepository;
-import odo.server.store.repository.UserRepository;
+import odo.server.store.repository.UserPointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class StoreController {
     @Autowired
-    private UserRepository userRepository;
+    private UserPointRepository userPointRepository;
 
     @Autowired
     private ItemRepository itemRepository;
@@ -27,13 +25,16 @@ public class StoreController {
     @Autowired
     private InventoryRepository inventoryRepository;
 
+//    @Autowired
+//    private OauthMemberRepository oauthMemberRepository
+
     @GetMapping("/store/api/userpoint/{userId}")
     public ResponseEntity<Integer> getUserPoint(@PathVariable Long userId){
 
         //System.out.println("userId = " + userId);
 
-        int userPoint = userRepository.findById(userId)
-                .map(User::getPoint)
+        int userPoint = userPointRepository.findById(userId)
+                .map(UserPoint::getPoint)
                 .orElse(-1);
 
         //System.out.println("userPoint = " + userPoint);
@@ -43,13 +44,15 @@ public class StoreController {
 
     @GetMapping("/store/api/purchase/{userId}")
     public String updatePoint(@PathVariable Long userId, @RequestParam int point){
+        System.out.println(" ================================== ");
         System.out.println("userId = " + userId);
         System.out.println("point = " + point);
+        System.out.println(" ================================== ");
 
-        User user = userRepository.findById(userId).orElse(null);
+        UserPoint user = userPointRepository.findById(userId).orElse(null);
         if(user != null){
             user.setPoint(point);
-            userRepository.save(user);
+            userPointRepository.save(user);
             return "Point update successfully";
         }else{
             return "ID Not Found";
@@ -69,11 +72,17 @@ public class StoreController {
     public String addToInventory(@PathVariable Long userId, @RequestParam Long itemId){
         System.out.println("userId = " + userId);
         System.out.println("itemId = " + itemId);
-        User user = userRepository.findById(userId)
+
+        UserPoint user = userPointRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found" + userId));
 
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new RuntimeException("Item not found" + itemId));
+
+        Inven inven = new Inven();
+        inven.setUserId(userId);
+        inven.setItemId(itemId);
+        inventoryRepository.save(inven);
 //
 //        Inven inven = new Inven();
 //        inven.setUser(user);
@@ -85,5 +94,37 @@ public class StoreController {
     }
 
 
+    @GetMapping("/store/api/invencheck/{userId}")
+    public ResponseEntity<List<Long>> InventoryCheck(@PathVariable Long userId){
+        List<Inven> userInventory = inventoryRepository.findByUserId(userId);
+        if (!userInventory.isEmpty()) {
+            // Extract itemIds from the inventory
+            List<Long> itemIds = userInventory.stream()
+                    .map(Inven::getItemId)
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.ok(itemIds);
+        } else {
+            // User not found or has an empty inventory, return 404
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+//    public ResponseEntity<List<Long>> getItemIdByUserId(@PathVariable String userEmail) {
+//        List<Inven> userInventory = invenRepository.findByUserEmail(userEmail);
+//        System.out.println("userInventory = " + userInventory);
+//
+//        if (!userInventory.isEmpty()) {
+//            // Extract itemIds from the inventory
+//            List<Long> itemIds = userInventory.stream()
+//                    .map(Inven::getItemId)
+//                    .collect(Collectors.toList());
+//
+//            return ResponseEntity.ok(itemIds);
+//        } else {
+//            // User not found or has an empty inventory, return 404
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
 }

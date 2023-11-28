@@ -1,15 +1,15 @@
 package odo.server.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Builder
 @AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor(access = PROTECTED)
 @Table(name = "oauth_member",
         uniqueConstraints = {
@@ -42,6 +42,16 @@ public class OauthMember {
     private String blogAddress;
     private String blogNickname;
 
+    // profile 페이지에서 수정이 가능한 정보
+    private String introduction;
+    private String socialA;
+    private String socialB;
+    private String socialC;
+    private String socialD;
+    private boolean reviewReceived;
+    private boolean updateReceived;
+
+
     public Long id() {
         return id;
     }
@@ -64,15 +74,17 @@ public class OauthMember {
 
     public String blogNickname() { return blogNickname; }
 
-    public void setBlogName(String blogName) {
+    public void UpdateOauthMember(String email, String nickname, String blogName, String introduction, String socialA, String socialB, String socialC, String socialD, boolean reviewReceived, boolean updateReceived) {
+        this.email = email;
+        //this.profileImageUrl = profileImageUrl;
+        this.nickname = nickname;
         this.blogName = blogName;
-    }
-
-    public void setBlogAddress(String blogAddress) {
-        this.blogAddress = blogAddress;
-    }
-
-    public void setBlogNickname(String blogNickname) {
-        this.blogNickname = blogNickname;
+        this.introduction = introduction;
+        this.socialA = socialA;
+        this.socialB = socialB;
+        this.socialC = socialC;
+        this.socialD = socialD;
+        this.reviewReceived = reviewReceived;
+        this.updateReceived = updateReceived;
     }
 }

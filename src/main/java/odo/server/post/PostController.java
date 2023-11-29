@@ -87,4 +87,17 @@ public class PostController {
 		return postService.deletePost(postId);
 	}
 
+
+
+	// get posts created today
+	@GetMapping("/posts/today")
+	public List<Post> getPostsCreatedToday() {
+		return postService.getPostsCreatedToday();
+	}
+
+	// get post count by date
+	@GetMapping("/post/countByDate")
+	public List<Map<String, Object>> getPostCountByDate() {
+		return postService.getPostCountByDate();
+	}
 }

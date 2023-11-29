@@ -64,6 +64,12 @@ public class Post {
 
     // 생성자, 게터, 세터 생략
 
+    //잔디밭에 쓰일 날짜
+    @PrePersist
+    protected void onCreate() {
+        createdTime = new Date();
+    }
+
 }
 
 // @DynamicInsert : Insert시 Null인 필드를 제외하기위해 사용했음.

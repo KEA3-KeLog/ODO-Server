@@ -23,28 +23,7 @@ public class InventoryController {
 
     @Autowired
     ItemRepository itemRepository;
-//
-//    @GetMapping("/Inven/api/userInventory/{userId}")
-//    public List<Map<String,String>> getItemByUserId(@PathVariable Long userId) {
-//        List<Inven> items = invenRepository.findByUserEmail(userEmail);
-//        System.out.println("items = " + items);
-//        List<Long> itemIds = items.stream().map(Inven::getItemId).collect(Collectors.toList());
-//        System.out.println("itemIds = " + itemIds);
-//
-//        List<Item> itemList = itemRepository.findByIdIn(itemIds);
-//        System.out.println("itemList = " + itemList);
-//
-//        List<Map<String, String>> itemResponses = new ArrayList<>();
-//
-//        for(Item item : itemList){
-//            Map<String, String> response = new HashMap<>();
-//            response.put("itemName", item.getItem_Name());
-//            response.put("itemInfo", item.getItem_Info());
-//            itemResponses.add(response);
-//        }
-//        return itemResponses;
-//    }
-//
+
     @GetMapping("/Inven/api/userInventory/{userId}")
     public List<Map<String, String>> testAPI(@PathVariable Long userId){
         List<Inven> items = inventoryRepository.findByUserId(userId);
@@ -57,6 +36,8 @@ public class InventoryController {
         for(Item item : itemList){
             Map<String, String> response = new HashMap<>();
             response.put("itemName", item.getItemName());
+            response.put("itemInfo", item.getInfo());
+            response.put("itemId",Long.toString(item.getId()));
             itemResponses.add(response);
         }
 

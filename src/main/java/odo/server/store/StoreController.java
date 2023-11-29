@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -126,5 +129,23 @@ public class StoreController {
 //            return ResponseEntity.notFound().build();
 //        }
 //    }
+
+    @GetMapping("/store/api/getAllItems")
+    public List<Map<String, String>> getAllItems() {
+        List<Item> itemList = itemRepository.findAll();
+
+        List<Map<String, String>> itemResponses = new ArrayList<>();
+
+        for(Item item : itemList) {
+            Map<String, String> response = new HashMap<>();
+            response.put("itemName", item.getItemName());
+            response.put("itemInfo", item.getInfo());
+            response.put("itemId",Long.toString(item.getId()));
+            response.put("itemPrice", String.valueOf(item.getPrice()));
+            itemResponses.add(response);
+        }
+
+        return itemResponses;
+    }
 
 }

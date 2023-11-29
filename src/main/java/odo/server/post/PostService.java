@@ -53,7 +53,7 @@ public class PostService {
 				.orElseThrow(() -> new ResourceNotFoundException("Not exist Post Data by id : [" + postId + "]"));
 
 		existingPost.setTitle(updatedPost.getTitle());
-		existingPost.setTag(updatedPost.getTag());
+		existingPost.setTagList(updatedPost.getTagList());
 		existingPost.setContents(updatedPost.getContents());
 		// Update other fields as needed
 

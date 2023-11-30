@@ -1,6 +1,10 @@
 package odo.server.post;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -53,7 +57,7 @@ public class PostService {
 				.orElseThrow(() -> new ResourceNotFoundException("Not exist Post Data by id : [" + postId + "]"));
 
 		existingPost.setTitle(updatedPost.getTitle());
-		existingPost.setTag(updatedPost.getTag());
+		existingPost.setTagList(updatedPost.getTagList());
 		existingPost.setContents(updatedPost.getContents());
 		// Update other fields as needed
 
@@ -69,6 +73,29 @@ public class PostService {
 		postRepository.delete(post);
 
 		return ResponseEntity.ok("Post deleted successfully");
+	}
+
+	public List<Post> getPostsCreatedToday() {
+		return postRepository.findPostsCreatedToday();
+	}
+
+	public List<Map<String, Object>> getPostCountByDate() {
+		List<Object[]> result = postRepository.getPostCountByDate();
+		List<Map<String, Object>> postCountList = new ArrayList<>();
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		for (Object[] row : result) {
+			java.sql.Date date = (java.sql.Date) row[0];
+			Long count = (Long) row[1];
+			if (date != null) {
+				Map<String, Object> postCountMap = new HashMap<>();
+				postCountMap.put("date", dateFormat.format(date));
+				postCountMap.put("count", count);
+				postCountList.add(postCountMap);
+			}
+		}
+		return postCountList;
 	}
 
 }

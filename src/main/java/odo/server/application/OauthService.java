@@ -9,6 +9,8 @@ import odo.server.domain.authcode.AuthCodeRequestUrlProviderComposite;
 import odo.server.domain.client.OauthMemberClientComposite;
 import odo.server.post.Post;
 
+import odo.server.store.domain.UserPoint;
+import odo.server.store.repository.UserPointRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -28,6 +30,8 @@ public class OauthService {
     private final OauthMemberClientComposite oauthMemberClientComposite;
     private final OauthMemberRepository oauthMemberRepository;
     private final JdbcTemplate jdbcTemplate;
+
+    private final UserPointRepository userPointRepository;
 
     // OauthServerType을 받아서 해당 인증 서버에서 Auth Code를 받아오기 위한 URL 주소를 생성해줍니다.
     public String getAuthCodeRequestUrl(OauthServerType oauthServerType) {
@@ -65,6 +69,11 @@ public class OauthService {
         String sql = "UPDATE oauth_member SET blog_name=?, blog_address=?, blog_nickname=? WHERE id=?";
         Object[] params = { userBlogName, userBlogAddress, userBlogNickName, id };
         jdbcTemplate.update(sql, params);
+
+        UserPoint userPoint = new UserPoint();
+        userPoint.setId(id);
+
+        userPointRepository.save(userPoint);
 
         return "insert ok";
     }

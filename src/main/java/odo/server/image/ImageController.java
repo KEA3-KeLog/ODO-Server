@@ -62,6 +62,81 @@ public class ImageController {
         }
     }
 
+
+
+
+
+    //----이미지 수정/삭제
+    // ... (이전 코드 부분)
+
+    @PostMapping("/image/update")
+    public ResponseEntity<String> updateImage(@RequestParam("file") MultipartFile file,
+                                              @RequestParam("postKey") String postKey) {
+        try {
+            // 기존 이미지 삭제
+            String existingFileNewName = imageService.getImageByPostKey(Integer.parseInt(postKey));
+            if (existingFileNewName != null) {
+                Path existingFilePath = Paths.get("./image/" + existingFileNewName);
+                Files.deleteIfExists(existingFilePath);
+            }
+
+            // 새로운 이미지 저장
+            String directory = "./image/";
+            String fileOriName = file.getOriginalFilename();
+            String fileNewName = (new Date().getTime()) + "" + (new Random().ints(1000, 9999).findAny().getAsInt())
+                    + ".png";
+
+            Path path = Paths.get(directory + fileNewName);
+            Files.write(path, file.getBytes());
+
+            // 파일 정보 DB에 저장
+            Image image = new Image();
+            image.setPostKey(Integer.parseInt(postKey));
+            image.setFileOriName(fileOriName);
+            image.setFileNewName(fileNewName);
+            imageService.saveImage(image);
+
+            // 새로 저장된 이미지 URL 반환
+            return ResponseEntity.ok(fileNewName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("파일 업로드 실패");
+        }
+    }
+
+
+    // ... (이전 코드 부분)
+
+    @PostMapping("/image/delete")
+    public ResponseEntity<String> deleteImage(@RequestParam("postKey") String postKey) {
+        try {
+            // DB에서 이미지 정보 가져오기
+            String existingFileNewName = imageService.getImageByPostKey(Integer.parseInt(postKey));
+
+            if (existingFileNewName != null) {
+                // 파일시스템에서 이미지 파일 삭제
+                Path existingFilePath = Paths.get("./image/" + existingFileNewName);
+                Files.deleteIfExists(existingFilePath);
+
+                // DB에서 이미지 정보 삭제
+                imageService.deleteImage(Integer.parseInt(postKey));
+
+                return ResponseEntity.ok("이미지가 삭제되었습니다.");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("이미지를 찾을 수 없습니다.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("이미지 삭제 실패");
+        }
+    }
+
+// ... (이후 코드 부분)
+
+
+
+    //----이미지 수정/삭제
+
     @GetMapping("/image/{fileNewName}")
     public ResponseEntity<Resource> getImageByName(@PathVariable String fileNewName) {
         try {

@@ -48,7 +48,7 @@ public class PostController {
 			postWithImage.put("likes", post.getLikes());
 			postWithImage.put("counts", post.getCounts());
 			postWithImage.put("fileNewName", imageName);
-
+//
 			result.add(postWithImage);
 		}
 		return result;

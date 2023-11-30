@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 public class UserPoint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     private int point = 10000;

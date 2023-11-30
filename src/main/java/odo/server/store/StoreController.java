@@ -28,8 +28,6 @@ public class StoreController {
     @Autowired
     private InventoryRepository inventoryRepository;
 
-//    @Autowired
-//    private OauthMemberRepository oauthMemberRepository
 
     @GetMapping("/store/api/userpoint/{userId}")
     public ResponseEntity<Integer> getUserPoint(@PathVariable Long userId){
@@ -86,12 +84,6 @@ public class StoreController {
         inven.setUserId(userId);
         inven.setItemId(itemId);
         inventoryRepository.save(inven);
-//
-//        Inven inven = new Inven();
-//        inven.setUser(user);
-//        inven.setItem(item);
-//        inventoryRepository.save(inven);
-
         return "inven update success!";
 
     }
@@ -113,22 +105,6 @@ public class StoreController {
         }
 
     }
-//    public ResponseEntity<List<Long>> getItemIdByUserId(@PathVariable String userEmail) {
-//        List<Inven> userInventory = invenRepository.findByUserEmail(userEmail);
-//        System.out.println("userInventory = " + userInventory);
-//
-//        if (!userInventory.isEmpty()) {
-//            // Extract itemIds from the inventory
-//            List<Long> itemIds = userInventory.stream()
-//                    .map(Inven::getItemId)
-//                    .collect(Collectors.toList());
-//
-//            return ResponseEntity.ok(itemIds);
-//        } else {
-//            // User not found or has an empty inventory, return 404
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
 
     @GetMapping("/store/api/getAllItems")
     public List<Map<String, String>> getAllItems() {

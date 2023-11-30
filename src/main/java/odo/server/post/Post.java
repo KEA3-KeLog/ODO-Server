@@ -39,7 +39,7 @@ public class Post {
     @Column(name = "summary")
     private String summary;
 
-    @Column(name = "contents")
+    @Column(name = "contents" , columnDefinition = "LONGTEXT")
     private String contents;
 
     @Column(name = "created_time")

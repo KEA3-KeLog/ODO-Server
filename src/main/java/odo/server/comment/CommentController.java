@@ -59,7 +59,6 @@ public class CommentController {
 
     // }
     public String createComment(@RequestBody Comment comment) {
-        comment.setUserId(1);
         comment.setLikes(0);
         return commentService.createComment(comment);
     }

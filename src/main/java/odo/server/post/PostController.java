@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin(origins = "http://localhost:3000",allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -24,26 +24,15 @@ public class PostController {
 
 	// get all post
 	@GetMapping("/post")
-	public List<Post> getAllPost() {
-		return postService.getAllPost();
-	}
-
-	// @GetMapping("/posts/{userId}")
-	// public List<Post> getPostByUserId(
-	// @PathVariable Integer userId) {
-
-	// return postService.getPostByUserId(userId);
-	// }
-	@GetMapping("/posts/{userId}")
-	public List<Object> getPostsAndImagesByUserId(@PathVariable Integer userId) {
-		List<Post> posts = postService.getPostByUserId(userId);
+	public List<Object> getAllPost() {
+		List<Post> posts = postService.getAllPost();
 		List<Object> result = new ArrayList<>();
-	
+
 		for (Post post : posts) {
 			Integer postKey = post.getPostKey();
 			System.out.println(postKey);
 			String imageName = imageService.getImageByPostKey(postKey);
-	
+
 			// 원하는 구조의 새로운 맵 생성
 			Map<String, Object> postWithImage = new HashMap<>();
 			postWithImage.put("postId", post.getPostId());
@@ -59,11 +48,49 @@ public class PostController {
 			postWithImage.put("likes", post.getLikes());
 			postWithImage.put("counts", post.getCounts());
 			postWithImage.put("fileNewName", imageName);
-	
+
 			result.add(postWithImage);
 		}
 		return result;
 	}
+
+	// @GetMapping("/posts/{userId}")
+	// public List<Post> getPostByUserId(
+	// @PathVariable Integer userId) {
+
+	// return postService.getPostByUserId(userId);
+	// }
+	@GetMapping("/posts/{userId}")
+	public List<Object> getPostsAndImagesByUserId(@PathVariable Integer userId) {
+		List<Post> posts = postService.getPostByUserId(userId);
+		List<Object> result = new ArrayList<>();
+
+		for (Post post : posts) {
+			Integer postKey = post.getPostKey();
+			System.out.println(postKey);
+			String imageName = imageService.getImageByPostKey(postKey);
+
+			// 원하는 구조의 새로운 맵 생성
+			Map<String, Object> postWithImage = new HashMap<>();
+			postWithImage.put("postId", post.getPostId());
+			postWithImage.put("postKey", post.getPostKey());
+			postWithImage.put("title", post.getTitle());
+			postWithImage.put("tag", post.getTag());
+			postWithImage.put("tagList", post.getTagList());
+			postWithImage.put("summary", post.getSummary());
+			postWithImage.put("contents", post.getContents());
+			postWithImage.put("createdTime", post.getCreatedTime());
+			postWithImage.put("updatedTime", post.getUpdatedTime());
+			postWithImage.put("userId", post.getUserId());
+			postWithImage.put("likes", post.getLikes());
+			postWithImage.put("counts", post.getCounts());
+			postWithImage.put("fileNewName", imageName);
+
+			result.add(postWithImage);
+		}
+		return result;
+	}
+
 	// create post
 	@PostMapping("/post")
 	public String createPost(@RequestBody Post post) {

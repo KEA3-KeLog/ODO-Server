@@ -36,10 +36,12 @@ public class Post {
     @Column(name = "tag")
     private String tag;
 
-    @Column(name = "summary")
+    @Lob
+    @Column(name = "", columnDefinition = "LONGTEXT")
     private String summary;
 
-    @Column(name = "contents")
+    @Lob
+    @Column(name = "contents", columnDefinition = "LONGTEXT")
     private String contents;
 
     @Column(name = "created_time")

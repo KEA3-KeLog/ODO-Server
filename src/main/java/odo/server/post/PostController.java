@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -127,4 +128,27 @@ public class PostController {
 	public List<Map<String, Object>> getPostCountByDate() {
 		return postService.getPostCountByDate();
 	}
+
+	@PostMapping("/post/addNewValue")
+	public ResponseEntity<String> addNewValue(@RequestBody Map<String, Object> newEntry) {
+		try {
+			postService.addNewValue(newEntry);
+			return ResponseEntity.ok("New entry added successfully(spring)");
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Error adding new entry: " + e.getMessage());
+		}
+	}
+
+
+	@GetMapping("/post/countFreeze")
+	public List<Map<String, Object>> getCountFreeze() {
+		return postService.getCountFreeze();
+	}
+
+
+
+
+
+
 }

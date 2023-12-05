@@ -39,6 +39,10 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+	// https://mvnrepository.com/artifact/org.json/json
+	implementation group: 'org.json', name: 'json', version: '20200518'
+
+
 
 	// jwts
 	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'

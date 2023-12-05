@@ -2,6 +2,7 @@ package odo.server.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import odo.server.store.domain.UserPoint;
 
 import static lombok.AccessLevel.PROTECTED;
 
@@ -86,5 +87,16 @@ public class OauthMember {
         this.socialD = socialD;
         this.reviewReceived = reviewReceived;
         this.updateReceived = updateReceived;
+    }
+
+    @PostPersist
+    public void onPostPersist() {
+        // user 테이블에 새로운 값이 추가되면 호출되는 메서드
+        UserPoint userPoint = new UserPoint();
+        userPoint.setId(this.id);
+        userPoint.setPoint(10000);
+        // user_point 테이블에 새로운 레코드 추가
+        // 이 부분은 해당 로직에 맞게 수정이 필요할 수 있습니다.
+        // userRepository.save() 등을 사용하여 JPA를 통해 데이터베이스에 저장할 수 있습니다.
     }
 }

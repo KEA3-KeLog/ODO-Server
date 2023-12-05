@@ -11,17 +11,16 @@ import odo.server.post.Post;
 
 import odo.server.store.domain.UserPoint;
 import odo.server.store.repository.UserPointRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpSession;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -80,27 +79,21 @@ public class OauthService {
 
     // db에서 userId 를 기준으로 db를 조회하여 정보를 가져옵니다.
     public Map<String, Object> selectByUserId(Long userId) {
-        // String[] array = new String[3];
         String sql = "SELECT blog_nickname, email, blog_name FROM oauth_member WHERE id=?";
-        // String sql = "SELECT blog_nickname,email, profile_img_url FROM oauth_member
-        // WHERE id=?";
 
-        // Map<String, Object> params = new HashMap<>();
-        // params.put(userId);
+        try {
+            // Select One Row
+            Map<String, Object> result = jdbcTemplate.queryForObject(sql, new Object[]{userId}, new BeanPropertyRowMapper<>(HashMap.class));
 
-        // namedParameterJdbcTemplate.queryForList(sql, params);
-
-        // Select One Row
-        Map<String, Object> result = jdbcTemplate.queryForMap(sql, userId);
-
-        // String[] array = new String[3];
-        // array[0] = saved.blogNickname();
-        // array[1] = saved.profileImageUrl();
-        // array[2] = saved.email();
-
-        System.out.println("*********************************");
-        System.out.println(result);
-        return result;
+            System.out.println("*********************************");
+            System.out.println(result);
+            return result;
+        } catch (EmptyResultDataAccessException e) {
+            // Handle case when no rows are returned
+            System.out.println("No data found for userId: " + userId);
+            return Collections.emptyMap(); // or return null, or any default value
+        }
     }
+
 
 }

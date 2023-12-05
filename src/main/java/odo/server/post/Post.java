@@ -64,6 +64,7 @@ public class Post {
     @Column(name = "tag")
     private List<String> tagList;
 
+
     // 생성자, 게터, 세터 생략
 
     //잔디밭에 쓰일 날짜

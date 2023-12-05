@@ -1,10 +1,8 @@
 package odo.server.post;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +19,11 @@ public class PostService {
 
 	@Autowired
 	private PostTagRepository postTagRepository;
+
+	@Autowired
+	private StreakFreezeRepository StreakFreezeRepository;
+
+
 
 	// get posts data
 	public List<Post> getAllPost() {
@@ -96,6 +99,51 @@ public class PostService {
 			}
 		}
 		return postCountList;
+	}
+
+	public void addNewValue(Map<String, Object> newEntry) {
+		try {
+			// Extract data from the new entry map
+			Integer count = (Integer) newEntry.get("count");
+			String dateString = (String) newEntry.get("date");
+
+			// Convert the date String to a java.util.Date object
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date parsedDate = dateFormat.parse(dateString);
+
+			// Create a new StreakFreeze object with the extracted data
+			StreakFreeze streakFreeze = new StreakFreeze();
+			streakFreeze.setCount(count);
+			streakFreeze.setDate(parsedDate);
+
+			// Save the new StreakFreeze entry to the database
+			StreakFreezeRepository.save(streakFreeze);
+		} catch (ParseException e) {
+			// Handle parsing exception
+			e.printStackTrace();
+		}
+	}
+
+
+	public List<Map<String, Object>> getCountFreeze() {
+		List<Object[]> result = StreakFreezeRepository.getCountFreeze();
+		List<Map<String, Object>> countFreezeList = new ArrayList<>();
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		for (Object[] row : result) {
+			Date date = (Date) row[0];
+			Long count = (Long) row[1];
+
+			if (date != null) {
+				Map<String, Object> countFreezeMap = new HashMap<>();
+				countFreezeMap.put("date", dateFormat.format(date));
+				countFreezeMap.put("count", count);
+				countFreezeList.add(countFreezeMap);
+			}
+		}
+
+		return countFreezeList;
 	}
 
 }

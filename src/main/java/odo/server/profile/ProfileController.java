@@ -56,7 +56,7 @@ public class ProfileController {
             OauthMember oauthMember = member.get();
 
             oauthMember.setBlogName(profileResponseDto.getBlogName());
-            oauthMember.setNickname(profileResponseDto.getBlogNickName());
+            oauthMember.setBlogNickname(profileResponseDto.getBlogNickName());
             oauthMember.setIntroduction(profileResponseDto.getIntroduction());
             oauthMember.setSocialA(profileResponseDto.getSociala());
             oauthMember.setSocialB(profileResponseDto.getSocialb());

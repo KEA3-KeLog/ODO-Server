@@ -59,6 +59,9 @@ public class Post {
     @Column(name = "counts")
     private Integer counts;
 
+    @Column(name = "voice_file")
+    private String voiceFile;
+
     @ElementCollection
     @CollectionTable(name = "post_tags", joinColumns = @JoinColumn(name = "post_id"))
     @Column(name = "tag")

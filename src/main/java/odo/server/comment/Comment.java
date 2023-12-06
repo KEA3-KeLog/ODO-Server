@@ -1,10 +1,13 @@
 package odo.server.comment;
 
 import java.sql.Timestamp;
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -38,14 +41,19 @@ public class Comment {
     private String contents;
 
     @Column(name = "created_time")
-    private Timestamp createdTime;
+    private Date createdTime;
 
     @Column(name = "updated_time")
-    private Timestamp updatedTime;
+    private Date updatedTime;
     
     @Column(name = "user_id")
     private Integer userId;
 
     @Column(name = "likes")
     private Integer likes;
+
+        @PrePersist
+    protected void onCreate() {
+        createdTime = new Date();
+    }
 }

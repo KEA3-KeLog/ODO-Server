@@ -96,7 +96,7 @@ public class OauthService {
     // }
     public Map<String, Object> selectByUserId(Long userId) {
         // String[] array = new String[3];
-        String sql = "SELECT blog_nickname, email, blog_name FROM oauth_member WHERE id=?";
+        String sql = "SELECT blog_nickname, email, blog_name, introduction FROM oauth_member WHERE id=?";
 
         // Select One Row
         Map<String, Object> result = jdbcTemplate.queryForMap(sql, userId);

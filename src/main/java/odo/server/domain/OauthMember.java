@@ -12,18 +12,13 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 @Setter
 @NoArgsConstructor(access = PROTECTED)
-@Table(name = "oauth_member",
-        uniqueConstraints = {
-                // uniqueConstraints를 통해 OauthId의 유일함을 보장
-                @UniqueConstraint(
-                        name = "oauth_id_unique",
-                        columnNames = {
-                                "oauth_server_id",
-                                "oauth_server"
-                        }
-                ),
-        }
-)
+@Table(name = "oauth_member", uniqueConstraints = {
+        // uniqueConstraints를 통해 OauthId의 유일함을 보장
+        @UniqueConstraint(name = "oauth_id_unique", columnNames = {
+                "oauth_server_id",
+                "oauth_server"
+        }),
+})
 public class OauthMember {
 
     // 자동 증가되는 id 입니다.
@@ -61,25 +56,39 @@ public class OauthMember {
         return oauthId;
     }
 
-    public String email() { return email; }
+    public String email() {
+        return email;
+    }
 
-    public String nickname() { return nickname; }
+    public String nickname() {
+        return nickname;
+    }
 
     public String profileImageUrl() {
         return profileImageUrl;
     }
 
-    public String blogName() { return blogName; }
 
-    public String blogAddress() { return blogAddress; }
+    public String blogName() {
+        return blogName;
+    }
 
-    public String blogNickname() { return blogNickname; }
+    public String blogAddress() {
+        return blogAddress;
+    }
 
-    public String actor() { return actor;}
+    public String blogNickname() {
+        return blogNickname;
+    }
 
-    public void UpdateOauthMember(String email, String nickname, String blogName, String introduction, String socialA, String socialB, String socialC, String socialD, boolean reviewReceived, boolean updateReceived) {
+    public String actor() {
+        return actor;
+    }
+
+    public void UpdateOauthMember(String email, String nickname, String blogName, String introduction, String socialA,
+            String socialB, String socialC, String socialD, boolean reviewReceived, boolean updateReceived) {
         this.email = email;
-        //this.profileImageUrl = profileImageUrl;
+        // this.profileImageUrl = profileImageUrl;
         this.nickname = nickname;
         this.blogName = blogName;
         this.introduction = introduction;

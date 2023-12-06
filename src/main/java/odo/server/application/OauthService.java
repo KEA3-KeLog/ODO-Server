@@ -78,21 +78,32 @@ public class OauthService {
     }
 
     // db에서 userId 를 기준으로 db를 조회하여 정보를 가져옵니다.
+    // public Map<String, Object> selectByUserId(Long userId) {
+    //     String sql = "SELECT blog_nickname, email, blog_name FROM oauth_member WHERE id=?";
+
+    //     try {
+    //         // Select One Row
+    //         Map<String, Object> result = jdbcTemplate.queryForObject(sql, new Object[]{userId}, new BeanPropertyRowMapper<>(HashMap.class));
+
+    //         System.out.println("*********************************");
+    //         System.out.println(result);
+    //         return result;
+    //     } catch (EmptyResultDataAccessException e) {
+    //         // Handle case when no rows are returned
+    //         System.out.println("No data found for userId: " + userId);
+    //         return Collections.emptyMap(); // or return null, or any default value
+    //     }
+    // }
     public Map<String, Object> selectByUserId(Long userId) {
+        // String[] array = new String[3];
         String sql = "SELECT blog_nickname, email, blog_name FROM oauth_member WHERE id=?";
 
-        try {
-            // Select One Row
-            Map<String, Object> result = jdbcTemplate.queryForObject(sql, new Object[]{userId}, new BeanPropertyRowMapper<>(HashMap.class));
+        // Select One Row
+        Map<String, Object> result = jdbcTemplate.queryForMap(sql, userId);
 
-            System.out.println("*********************************");
-            System.out.println(result);
-            return result;
-        } catch (EmptyResultDataAccessException e) {
-            // Handle case when no rows are returned
-            System.out.println("No data found for userId: " + userId);
-            return Collections.emptyMap(); // or return null, or any default value
-        }
+        System.out.println("*********************************");
+        System.out.println(result);
+        return result;
     }
 
 

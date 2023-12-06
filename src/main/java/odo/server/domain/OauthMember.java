@@ -51,7 +51,7 @@ public class OauthMember {
     private String socialD;
     private boolean reviewReceived;
     private boolean updateReceived;
-
+    private String actor;
 
     public Long id() {
         return id;
@@ -74,6 +74,8 @@ public class OauthMember {
     public String blogAddress() { return blogAddress; }
 
     public String blogNickname() { return blogNickname; }
+
+    public String actor() { return actor;}
 
     public void UpdateOauthMember(String email, String nickname, String blogName, String introduction, String socialA, String socialB, String socialC, String socialD, boolean reviewReceived, boolean updateReceived) {
         this.email = email;

@@ -41,13 +41,22 @@ public class PostService {
 		return Integer.toString(post.getPostId());
 	}
 
-	private void saveTags(Post post, List<String> tagList) {
-		// Save tags in the post_tags table
+//	private void saveTags(Post post, List<String> tagList) {
+//		// Save tags in the post_tags table
+//		for (String tag : tagList) {
+//			PostTag postTag = new PostTag(post, tag);
+//			postTagRepository.save(postTag);
+//		}
+//	}
+protected void saveTags(Post post, Integer userId, List<String> tagList) {
+	if (userId != null) {
 		for (String tag : tagList) {
-			PostTag postTag = new PostTag(post, tag);
+			PostTag postTag = new PostTag(post, tag, userId);
 			postTagRepository.save(postTag);
 		}
 	}
+}
+
 
 	public ResponseEntity<Post> getPost(Integer postId) {
 		Post post = postRepository.findById(postId)

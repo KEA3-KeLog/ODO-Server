@@ -68,7 +68,6 @@ public class OauthMember {
         return profileImageUrl;
     }
 
-
     public String blogName() {
         return blogName;
     }

@@ -16,6 +16,7 @@ public class ProfileResponseDto {
     private String socialb;
     private String socialc;
     private String sociald;
+    private String profileImageUrl;
     private boolean reviewReceived;
     private boolean updateReceived;
 }

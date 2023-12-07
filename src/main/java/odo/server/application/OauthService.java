@@ -96,7 +96,7 @@ public class OauthService {
     // }
     public Map<String, Object> selectByUserId(Long userId) {
         // String[] array = new String[3];
-        String sql = "SELECT blog_nickname, email, blog_name, introduction FROM oauth_member WHERE id=?";
+        String sql = "SELECT blog_nickname, email, blog_name, introduction, profile_image_url FROM oauth_member WHERE id=?";
 
         // Select One Row
         Map<String, Object> result = jdbcTemplate.queryForMap(sql, userId);
@@ -104,6 +104,12 @@ public class OauthService {
         System.out.println("*********************************");
         System.out.println(result);
         return result;
+    }
+    public void saveProfileImg(String filename, Integer userId){
+        String url = "http://localhost:8080/api/image/" + filename;
+        String sql = "UPDATE oauth_member SET profile_image_url = ? WHERE id = ?";
+        Object[] params = { url, userId };
+        jdbcTemplate.update(sql, params);
     }
 
 

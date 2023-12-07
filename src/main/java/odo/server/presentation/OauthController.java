@@ -25,15 +25,19 @@ import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 @RequiredArgsConstructor
 @RequestMapping("/oauth")
@@ -52,8 +56,7 @@ public class OauthController {
     @GetMapping("/{oauthServerType}")
     ResponseEntity<Void> redirectAuthCodeRequestUrl(
             @PathVariable OauthServerType oauthServerType,
-            HttpServletResponse response
-    ) {
+            HttpServletResponse response) {
         String redirectUrl = oauthService.getAuthCodeRequestUrl(oauthServerType);
         response.sendRedirect(redirectUrl);
         return ResponseEntity.ok().build();
@@ -66,15 +69,14 @@ public class OauthController {
     ResponseEntity login(
             HttpServletRequest request,
             @PathVariable OauthServerType oauthServerType,
-            @RequestParam("code") String code
-    ) {
+            @RequestParam("code") String code) {
         String[] login = oauthService.login(oauthServerType, code);
         // HttpSession session =request.getSession(true);
         // session.setAttribute("userId", login[2]);
         // System.out.println("id : " + session.getAttribute("userId"));
 
-        String accessToken = jwtTokenizer.createAccessToken(Long.parseLong(login[2]),login[0]);
-        String refreshToken = jwtTokenizer.createRefreshToken(Long.parseLong(login[2]),login[0]);
+        String accessToken = jwtTokenizer.createAccessToken(Long.parseLong(login[2]), login[0]);
+        String refreshToken = jwtTokenizer.createRefreshToken(Long.parseLong(login[2]), login[0]);
 
         MemberLoginResponseDto memberloginresponse = MemberLoginResponseDto.builder()
                 .accessToken(accessToken)
@@ -88,23 +90,40 @@ public class OauthController {
         return new ResponseEntity(memberloginresponse, HttpStatus.OK);
     }
 
-
     // 프론트엔드로 부터 받아온 user data 입니다.
     @PostMapping("/user/insert")
     public void userInsert(@RequestBody BlogInfoOauthMember userBlogData) throws JSONException {
         log.info("email={}, id={}, userBlogName={}, userBlogNickname={}, userBlogAddress={}",
-                userBlogData.getEmail(), userBlogData.getId(),userBlogData.getUserBlogName(), userBlogData.getUserBlogNickname(), userBlogData.getUserBlogAddress());
-
+                userBlogData.getEmail(), userBlogData.getId(), userBlogData.getUserBlogName(),
+                userBlogData.getUserBlogNickname(), userBlogData.getUserBlogAddress());
 
         // h2 에서 일치하는 oauthId 찾아서 blogname, address, nickname 집어넣기
-        oauthService.insertBlogInfo(userBlogData.getId(), userBlogData.getUserBlogName(), userBlogData.getUserBlogAddress(), userBlogData.getUserBlogNickname());
+        oauthService.insertBlogInfo(userBlogData.getId(), userBlogData.getUserBlogName(),
+                userBlogData.getUserBlogAddress(), userBlogData.getUserBlogNickname());
     }
 
     @GetMapping("/api/user/{userId}")
     public Map<String, Object> getUserByUserId(
             @PathVariable Long userId) {
 
-
         return oauthService.selectByUserId(userId);
+    }
+
+    @PostMapping("/api/user/profileImg")
+    public void uploadProfileImg(@RequestParam("file") MultipartFile file,
+            @RequestParam("userId") Integer userId) {
+        try {
+            String directory = "./image/";
+            String fileNewName = (new Date().getTime()) + "" + (new Random().ints(1000, 9999).findAny().getAsInt())
+                    + ".png"; // 현재 날짜와 랜덤 정수값으로 새로운 파일명 만들기
+
+            // 파일 저장
+            Path path = Paths.get(directory + fileNewName);
+            Files.write(path, file.getBytes());
+
+            oauthService.saveProfileImg(fileNewName, userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

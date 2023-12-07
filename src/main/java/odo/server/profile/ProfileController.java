@@ -30,6 +30,7 @@ public class ProfileController {
                     .socialc(oauthMember.getSocialC())
                     .sociald(oauthMember.getSocialD())
                     .userEmail(oauthMember.getEmail())
+                    .profileImageUrl(oauthMember.getProfileImageUrl())
                     .reviewReceived(oauthMember.isReviewReceived())
                     .updateReceived(oauthMember.isUpdateReceived())
                     .build();

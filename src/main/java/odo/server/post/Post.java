@@ -63,9 +63,11 @@ public class Post {
     private String voiceFile;
 
     @ElementCollection
-    @CollectionTable(name = "post_tags", joinColumns = @JoinColumn(name = "post_id"))
+//    @CollectionTable(name = "post_tags", joinColumns = @JoinColumn(name = "post_id"))
     @Column(name = "tag")
     private List<String> tagList;
+
+
 
 
     // 생성자, 게터, 세터 생략

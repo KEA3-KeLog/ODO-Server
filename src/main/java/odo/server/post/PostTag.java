@@ -18,13 +18,22 @@ public class PostTag {
     @Column(name = "tag", nullable = false)
     private String tag;
 
+    @Column(name = "user_id", nullable = false)
+    private Integer userId;  // userId 추가
+
     public PostTag() {
         // Default constructor is needed by JPA
     }
 
-    public PostTag(Post post, String tag) {
+
+    //    public PostTag(Post post, String tag) {
+//        this.post = post;
+//        this.tag = tag;
+//    }
+    public PostTag(Post post, String tag, Integer userId) {
         this.post = post;
         this.tag = tag;
+        this.userId = userId;
     }
 
     // Getters and setters

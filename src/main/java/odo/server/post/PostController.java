@@ -95,7 +95,9 @@ public class PostController {
 	// create post
 	@PostMapping("/post")
 	public String createPost(@RequestBody Post post) {
-		return postService.createPost(post);
+		String result = postService.createPost(post);
+		postService.saveTags(post, post.getUserId(), post.getTagList());
+		return result;
 	}
 
 	@GetMapping("/post/{postId}")

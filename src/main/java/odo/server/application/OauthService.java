@@ -111,6 +111,12 @@ public class OauthService {
         Object[] params = { url, userId };
         jdbcTemplate.update(sql, params);
     }
+    public void equipIU(Integer userId) {
+        String sql = "UPDATE oauth_member SET actor = ? WHERE id = ?";
+        Object[] params = { "IU", userId };
+        jdbcTemplate.update(sql, params);
+
+    }
 
 
 }

@@ -1,5 +1,6 @@
 package odo.server.Inventory;
 
+import odo.server.application.OauthService;
 import odo.server.dto.ItemInfo;
 import odo.server.store.domain.Inven;
 import odo.server.store.domain.Item;
@@ -11,6 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
@@ -20,13 +24,16 @@ import java.util.stream.Collectors;
 public class InventoryController {
 
     @Autowired
+    private OauthService oauthService;
+
+    @Autowired
     InventoryRepository inventoryRepository;
 
     @Autowired
     ItemRepository itemRepository;
 
     @GetMapping("/Inven/api/userInventory/{userId}")
-    public List<Map<String, String>> testAPI(@PathVariable Long userId){
+    public List<Map<String, String>> testAPI(@PathVariable Long userId) {
         List<Inven> items = inventoryRepository.findByUserId(userId);
         List<Long> itemIds = items.stream().map(Inven::getItemId).collect(Collectors.toList());
 
@@ -34,38 +41,43 @@ public class InventoryController {
 
         List<Map<String, String>> itemResponses = new ArrayList<>();
 
-        for(Item item : itemList){
+        for (Item item : itemList) {
             Map<String, String> response = new HashMap<>();
             response.put("itemName", item.getItemName());
             response.put("itemInfo", item.getInfo());
-            response.put("itemId",Long.toString(item.getId()));
+            response.put("itemId", Long.toString(item.getId()));
             itemResponses.add(response);
         }
 
         return itemResponses;
     }
 
-//    @GetMapping("/userInventory/{userId}")
-//    public ResponseEntity<Map<String, Object>> getUserInventory(@PathVariable Long userId) {
-//        Map<String, Object> response = new HashMap<>();
-//
-//        // Join을 사용하여 두 테이블을 연결하고 조회한다.
-//        List<Object[]> joinedResult = inventoryRepository.joinItemTable(userId);
-//
-//        List<ItemInfo> itemInfos = new ArrayList<>();
-//        for (Object[] result : joinedResult) {
-//            String itemName = (String) result[0];
-//            int itemPrice = (int) result[1];
-//            itemInfos.add(new ItemInfo(itemName, itemPrice));
-//        }
-//
-//        response.put("userId", userId);
-//        response.put("items", itemInfos);
-//
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }
+    @PostMapping("/Inven/api/userInventory/{userId}")
+    public void equipItem(@PathVariable Integer userId, @RequestParam("itemId") Integer itemId) {
+        if (itemId == 2) {
+            oauthService.equipIU(userId);
+        }
+    }
 
-
-
+    // @GetMapping("/userInventory/{userId}")
+    // public ResponseEntity<Map<String, Object>> getUserInventory(@PathVariable
+    // Long userId) {
+    // Map<String, Object> response = new HashMap<>();
+    //
+    // // Join을 사용하여 두 테이블을 연결하고 조회한다.
+    // List<Object[]> joinedResult = inventoryRepository.joinItemTable(userId);
+    //
+    // List<ItemInfo> itemInfos = new ArrayList<>();
+    // for (Object[] result : joinedResult) {
+    // String itemName = (String) result[0];
+    // int itemPrice = (int) result[1];
+    // itemInfos.add(new ItemInfo(itemName, itemPrice));
+    // }
+    //
+    // response.put("userId", userId);
+    // response.put("items", itemInfos);
+    //
+    // return new ResponseEntity<>(response, HttpStatus.OK);
+    // }
 
 }

@@ -2,6 +2,7 @@ package odo.server.common.config;
 
 import lombok.RequiredArgsConstructor;
 import odo.server.presentation.OauthServerTypeConverter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -12,10 +13,13 @@ import org.springframework.http.HttpMethod;
 @RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
 
+    @Value("${cors.allowed-origin}")
+    private String allowedOrigin;
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000")
+                .allowedOrigins(allowedOrigin)
                 .allowedMethods(
                         HttpMethod.GET.name(),
                         HttpMethod.POST.name(),

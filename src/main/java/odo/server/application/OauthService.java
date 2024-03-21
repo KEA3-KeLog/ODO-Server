@@ -9,6 +9,7 @@ import odo.server.domain.authcode.AuthCodeRequestUrlProviderComposite;
 import odo.server.domain.client.OauthMemberClientComposite;
 import odo.server.post.Post;
 
+import org.springframework.beans.factory.annotation.Value;
 import odo.server.store.domain.UserPoint;
 import odo.server.store.repository.UserPointRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -29,7 +30,8 @@ public class OauthService {
     private final OauthMemberClientComposite oauthMemberClientComposite;
     private final OauthMemberRepository oauthMemberRepository;
     private final JdbcTemplate jdbcTemplate;
-
+    @Value("${app.image.base-url}")
+    private String baseUrl;
     private final UserPointRepository userPointRepository;
 
     // OauthServerType을 받아서 해당 인증 서버에서 Auth Code를 받아오기 위한 URL 주소를 생성해줍니다.
@@ -77,23 +79,7 @@ public class OauthService {
         return "insert ok";
     }
 
-    // db에서 userId 를 기준으로 db를 조회하여 정보를 가져옵니다.
-    // public Map<String, Object> selectByUserId(Long userId) {
-    //     String sql = "SELECT blog_nickname, email, blog_name FROM oauth_member WHERE id=?";
 
-    //     try {
-    //         // Select One Row
-    //         Map<String, Object> result = jdbcTemplate.queryForObject(sql, new Object[]{userId}, new BeanPropertyRowMapper<>(HashMap.class));
-
-    //         System.out.println("*********************************");
-    //         System.out.println(result);
-    //         return result;
-    //     } catch (EmptyResultDataAccessException e) {
-    //         // Handle case when no rows are returned
-    //         System.out.println("No data found for userId: " + userId);
-    //         return Collections.emptyMap(); // or return null, or any default value
-    //     }
-    // }
     public Map<String, Object> selectByUserId(Long userId) {
         // String[] array = new String[3];
         String sql = "SELECT blog_nickname, email, blog_name, introduction, profile_image_url FROM oauth_member WHERE id=?";
@@ -106,7 +92,7 @@ public class OauthService {
         return result;
     }
     public void saveProfileImg(String filename, Integer userId){
-        String url = "http://localhost:8080/api/image/" + filename;
+        String url = baseUrl + filename;
         String sql = "UPDATE oauth_member SET profile_image_url = ? WHERE id = ?";
         Object[] params = { url, userId };
         jdbcTemplate.update(sql, params);

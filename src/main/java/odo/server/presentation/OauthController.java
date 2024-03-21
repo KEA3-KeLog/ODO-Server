@@ -42,7 +42,7 @@ import java.util.Random;
 @RequiredArgsConstructor
 @RequestMapping("/oauth")
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+
 public class OauthController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final OauthService oauthService;
@@ -64,7 +64,7 @@ public class OauthController {
 
     // 사용자가 카카오톡으로 로그인 + 정보 제공 동의를 진행하면
     // 프론트엔드로 Redirect되며,
-    // 프론트엔드는 이때 code를 받아서 http://localhost:8080/oauth/login/kakao로 보냅니다.
+    // 프론트엔드는 이때 code를 받아서 http://ip주소:8080/oauth/login/kakao로 보냅니다.
     @GetMapping("/login/{oauthServerType}")
     ResponseEntity login(
             HttpServletRequest request,

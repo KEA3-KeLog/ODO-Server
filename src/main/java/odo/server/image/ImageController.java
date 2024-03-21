@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 
-@CrossOrigin(origins = "http://localhost:3000")
+
 @RestController
 @RequestMapping("/api")
 

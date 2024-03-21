@@ -18,7 +18,6 @@ import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.Random;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class VoiceFileController {
     @Autowired

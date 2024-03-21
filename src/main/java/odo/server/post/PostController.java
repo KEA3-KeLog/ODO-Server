@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor

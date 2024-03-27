@@ -108,22 +108,27 @@ ODO는 기존 텍스트 기반의 웹 블로그 플랫폼을 넘어 음성 서�
 <br/>
 
 ## 8.주요 기능
+<br/>
+
 |||
 | :------: | :------: |
 |<img width="480" alt="image" src="https://github.com/KEA3-KeLog/ODO-Server/assets/72259206/5d96a1ad-9087-4ca2-9fd7-bd79fad122d7" loop=infinite>|<video width="480" src="https://github.com/KEA3-KeLog/ODO-Server/assets/72259206/38e90ff9-2400-4341-adbf-98183f7819aa">|
 |<img width="480" alt="image" src="https://github.com/KEA3-KeLog/ODO-Server/assets/72259206/437f4819-ab80-4b3a-adac-b2c1df4d1637" loop=infinite>|<video width="480" src="https://github.com/KEA3-KeLog/ODO-Server/assets/72259206/b192da07-ab12-4e46-af62-5e24f3b1e0a0">|
 - ODO는 글을 읽어주는 음성서비스를 제공합니다.
+<br/>
 
 |||
 | :------: | :------: |
 |<img width="480" alt="image" src="https://github.com/KEA3-KeLog/ODO-Server/assets/72259206/c1345ff7-e053-41d4-affd-5adf082547c2" loop=infinite>|<video width="480" src="https://github.com/KEA3-KeLog/ODO-Server/assets/72259206/8a818ea4-76b1-450b-a712-ad200b16bc65">|
 - 사용자의 목소리를 학습시킬 수 있습니다.
 - 게시글의 요약, 본문 블로그 방문 인사말 등에 음성을 적용이 가능합니다.
+<br/>
 
 |||
 | :------: | :------: |
 |<img width="470" alt="image" src="https://github.com/KEA3-KeLog/ODO-Server/assets/72259206/f36d8f1e-fe1f-444d-baf7-091d98aaae5f">|<img width="470" alt="image" src="https://github.com/KEA3-KeLog/ODO-Server/assets/72259206/722c5e17-534c-4cb6-9831-7bf788ebeebf">|
 - 상점과 인벤토리 기능을 통해 원하는 디자인과 기능을 구매하고 사용여부를 결정할 수 있습니다.
+<br/>
 
 |||
 | :------: | :------: |

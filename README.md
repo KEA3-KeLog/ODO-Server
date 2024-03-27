@@ -108,10 +108,15 @@ ODO는 기존 텍스트 기반의 웹 블로그 플랫폼을 넘어 음성 서�
 <br/>
 
 ## 8.주요 기능
+|||
+| :------: | :------: |
+|<img width="480" alt="image" src="https://github.com/KEA3-KeLog/ODO-Server/assets/72259206/1df3f012-bcd7-4477-bcfb-244a8e665ed3">|<video width="480" src="https://github.com/KEA3-KeLog/ODO-Server/assets/72259206/bb45abd7-e48a-4853-8b60-26dfe455d95e"></div>|
 - ODO는 글을 읽어주는 음성서비스를 제공합니다.
 - 사용자의 목소리를 학습시킬 수 있습니다.
 - 게시글의 요약, 본문 블로그 방문 인사말 등에 음성을 적용이 가능합니다.
 - 웹 블로그 서비스의 인증/인가, 글 작성, 댓글, 대댓글 작성, 개인 정보 수정 등이 가능합니다.
+
+
 
   <br/>
 <br/>

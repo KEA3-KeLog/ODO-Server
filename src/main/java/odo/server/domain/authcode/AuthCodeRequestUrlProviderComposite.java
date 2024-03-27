@@ -9,7 +9,7 @@ import java.util.Set;
 
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
-
+ 
 @Component
 public class AuthCodeRequestUrlProviderComposite {
     private final Map<OauthServerType, AuthCodeRequestUrlProvider> mapping;

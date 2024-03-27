@@ -18,3 +18,4 @@ public class MemberLoginResponseDto {
     private String blogName;
     private String nickName;
 }
+ 

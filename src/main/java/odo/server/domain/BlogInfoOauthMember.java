@@ -33,3 +33,4 @@ public class BlogInfoOauthMember {
         return userBlogNickname;
     }
 }
+ 

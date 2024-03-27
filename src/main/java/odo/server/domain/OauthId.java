@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import static jakarta.persistence.EnumType.STRING;
-
+ 
 @Embeddable
 @AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)

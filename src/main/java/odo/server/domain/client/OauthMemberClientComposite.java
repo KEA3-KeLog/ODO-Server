@@ -22,7 +22,7 @@ public class OauthMemberClientComposite {
                         identity()
                 ));
     }
-
+ 
     public OauthMember fetch(OauthServerType oauthServerType, String authCode) {
         return getClient(oauthServerType).fetch(authCode);
     }

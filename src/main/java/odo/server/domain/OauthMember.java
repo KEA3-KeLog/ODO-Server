@@ -21,7 +21,7 @@ import static lombok.AccessLevel.PROTECTED;
 })
 public class OauthMember {
 
-    // 자동 증가되는 id 입니다.
+    // 자동 증 가되는 id 입니다.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

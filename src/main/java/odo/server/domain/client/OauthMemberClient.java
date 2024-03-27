@@ -21,3 +21,4 @@ public interface OauthMemberClient {
 //        AccessToken을 통해 회원 정보 조회
 //
 //     이 과정을 Auth Code를 통해 회원 정보를 조회하는 과정으로 캡슐화하였습니다.
+ 

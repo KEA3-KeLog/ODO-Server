@@ -122,12 +122,12 @@ ODO는 기존 텍스트 기반의 웹 블로그 플랫폼을 넘어 음성 서�
 
 |||
 | :------: | :------: |
-|<img width="480" alt="image" src="https://github.com/KEA3-KeLog/ODO-Server/assets/72259206/f36d8f1e-fe1f-444d-baf7-091d98aaae5f">|<img width="480" alt="image" src="https://github.com/KEA3-KeLog/ODO-Server/assets/72259206/722c5e17-534c-4cb6-9831-7bf788ebeebf">|
+|<img width="470" alt="image" src="https://github.com/KEA3-KeLog/ODO-Server/assets/72259206/f36d8f1e-fe1f-444d-baf7-091d98aaae5f">|<img width="470" alt="image" src="https://github.com/KEA3-KeLog/ODO-Server/assets/72259206/722c5e17-534c-4cb6-9831-7bf788ebeebf">|
 - 상점과 인벤토리 기능을 통해 원하는 디자인과 기능을 구매하고 사용여부를 결정할 수 있습니다.
 
 |||
 | :------: | :------: |
-|<img width="480" alt="image" src="https://github.com/KEA3-KeLog/ODO-Server/assets/72259206/ee1e7ade-6534-467e-b0f4-e1b87809350c">|<img width="480" alt="image" src="https://github.com/KEA3-KeLog/ODO-Server/assets/72259206/65f2f2e5-4efb-4fec-b4f5-b96872ee9feb">|
+|<img width="470" alt="image" src="https://github.com/KEA3-KeLog/ODO-Server/assets/72259206/ee1e7ade-6534-467e-b0f4-e1b87809350c">|<img width="470" alt="image" src="https://github.com/KEA3-KeLog/ODO-Server/assets/72259206/65f2f2e5-4efb-4fec-b4f5-b96872ee9feb">|
 - 웹 블로그 서비스의 인증/인가, 글 작성, 댓글, 대댓글 작성, 개인 정보 수정 등이 가능합니다.
 
 

@@ -18,3 +18,4 @@ public interface GoogleApiClient {
     @GetExchange("https://www.googleapis.com/userinfo/v2/me")
     GoogleMemberResponse fetchMember(@RequestHeader(name = AUTHORIZATION) String bearerToken);
 }
+ 

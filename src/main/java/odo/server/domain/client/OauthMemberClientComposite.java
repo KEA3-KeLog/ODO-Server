@@ -14,7 +14,7 @@ import static java.util.stream.Collectors.toMap;
 @Component
 public class OauthMemberClientComposite {
     private final Map<OauthServerType, OauthMemberClient> mapping;
-
+ 
     public OauthMemberClientComposite(Set<OauthMemberClient> clients) {
         mapping = clients.stream()
                 .collect(toMap(

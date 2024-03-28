@@ -9,3 +9,4 @@ import odo.server.post.Post;
 public interface ImageRepository extends JpaRepository<Image, Integer> {
     List<Image> findAllByPostKey(Integer postKey);
 }
+ 

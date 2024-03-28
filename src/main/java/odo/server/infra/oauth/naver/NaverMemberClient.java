@@ -21,7 +21,7 @@ public class NaverMemberClient implements OauthMemberClient {
     public OauthServerType supportServer() {
         return OauthServerType.NAVER;
     }
-
+ 
     @Override
     public OauthMember fetch(String authCode) {
         NaverToken tokenInfo = naverApiClient.fetchToken(tokenRequestParams(authCode));

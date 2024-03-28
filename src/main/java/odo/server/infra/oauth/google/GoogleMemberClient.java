@@ -20,7 +20,7 @@ public class GoogleMemberClient implements OauthMemberClient {
     @Override
     public OauthServerType supportServer() {
         return OauthServerType.GOOGLE;
-    }
+    } 
 
     @Override
     public OauthMember fetch(String authCode) {

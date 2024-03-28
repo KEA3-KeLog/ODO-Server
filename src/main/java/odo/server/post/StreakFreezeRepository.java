@@ -13,3 +13,4 @@ public interface StreakFreezeRepository extends JpaRepository<StreakFreeze, Long
 }
 
 
+ 

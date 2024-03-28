@@ -20,3 +20,4 @@ public class ProfileResponseDto {
     private boolean reviewReceived;
     private boolean updateReceived;
 }
+ 

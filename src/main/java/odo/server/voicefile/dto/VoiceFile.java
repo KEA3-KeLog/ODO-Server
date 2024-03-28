@@ -27,3 +27,4 @@ public class VoiceFile {
     @Column(name = "file_new_name")
     private String fileNewName;
 }
+ 

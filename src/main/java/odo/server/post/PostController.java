@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class PostController {
-
+ 
 	@Autowired
 	private PostService postService;
 	private final ImageService imageService;

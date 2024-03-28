@@ -16,7 +16,7 @@ public class KakaoOauthCodeRequestUrlProvider implements AuthCodeRequestUrlProvi
     public OauthServerType supportServer() {
         return OauthServerType.KAKAO;
     }
-
+ 
     @Override
     public String provide() {
         // 인가코드를 받기위한 URL 입니다

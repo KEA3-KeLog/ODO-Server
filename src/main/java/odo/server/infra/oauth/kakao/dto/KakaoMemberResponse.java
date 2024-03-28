@@ -25,7 +25,7 @@ public record KakaoMemberResponse (
                 .nickname(kakaoAccount.profile.nickname)
                 .profileImageUrl(kakaoAccount.profile.profileImageUrl)
                 .build();
-    }
+    } 
 
     @JsonNaming(SnakeCaseStrategy.class)
     public record KakaoAccount(

@@ -21,7 +21,7 @@ public class DbInitRunner implements CommandLineRunner {
     public DbInitRunner(ItemRepository itemRepository, UserPointRepository userPointRepository) {
         this.itemRepository = itemRepository;
         this.userPointRepository = userPointRepository;
-    }
+    } 
 
     @Override
     public void run(String... args) {

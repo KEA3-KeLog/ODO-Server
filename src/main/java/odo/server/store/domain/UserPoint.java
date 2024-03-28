@@ -20,7 +20,7 @@ public class UserPoint {
     public UserPoint(int point) {
         this.point = point;
     }
-
+ 
     // getter, setter 등 필요한 메서드들을 추가하세요
 
     public Long getId() {

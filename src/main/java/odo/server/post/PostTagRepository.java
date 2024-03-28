@@ -18,3 +18,4 @@ public interface PostTagRepository extends JpaRepository<PostTag, Long> {
         Long getTagCount();
     }
 }
+ 

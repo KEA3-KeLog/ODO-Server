@@ -18,7 +18,7 @@ import static lombok.AccessLevel.PROTECTED;
                 "oauth_server_id",
                 "oauth_server"
         }),
-})
+}) 
 public class OauthMember {
 
     // 자동 증 가되는 id 입니다.

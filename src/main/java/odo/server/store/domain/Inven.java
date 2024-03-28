@@ -18,4 +18,4 @@ public class Inven {
     private Long itemId;
 
 // 생성자, getter, setter 등 필요한 메서드들을 추가하세요
-}
+} 

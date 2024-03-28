@@ -16,4 +16,4 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     List<Object[]> getPostCountByDate();
 
 
-}
+} 

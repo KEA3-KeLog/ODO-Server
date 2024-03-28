@@ -12,7 +12,7 @@ import org.springframework.http.HttpMethod;
 @Configuration
 @RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
-
+ 
     @Value("${cors.allowed-origin}")
     private String allowedOrigin;
  

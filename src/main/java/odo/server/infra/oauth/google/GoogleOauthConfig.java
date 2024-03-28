@@ -11,3 +11,4 @@ public record GoogleOauthConfig(
         String state
 ) {
 }
+ 

@@ -13,3 +13,4 @@ public record NaverToken(
         String errorDescription
 ) {
 }
+ 

@@ -13,7 +13,7 @@ public class BlogInfoOauthMember {
     private String userBlogName;
     private String userBlogNickname;
     private String userBlogAddress;
-
+ 
     public String getEmail(){
         return email;
     }

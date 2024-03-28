@@ -8,3 +8,4 @@ import java.util.List;
 public interface InventoryRepository extends JpaRepository<Inven,Long> {
     List<Inven> findByUserId(Long userId);
 }
+ 

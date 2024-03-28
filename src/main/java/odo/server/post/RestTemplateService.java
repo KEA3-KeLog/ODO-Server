@@ -10,7 +10,7 @@ import org.springframework.http.MediaType;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+ 
 public class RestTemplateService {
     // [내 애플리케이션] > [앱 키] 에서 확인한 REST API 키 값 입력
     private static final String REST_API_KEY = "3bb30f6d9eab61add4b056721668725f";

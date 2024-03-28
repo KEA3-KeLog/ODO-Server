@@ -16,7 +16,7 @@ public class GoogleAuthCodeRequestUrlProvider implements AuthCodeRequestUrlProvi
     public OauthServerType supportServer() {
         return OauthServerType.GOOGLE;
     }
-
+ 
     @Override
     public String provide() {
         return UriComponentsBuilder

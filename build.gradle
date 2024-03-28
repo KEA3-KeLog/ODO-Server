@@ -31,15 +31,13 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-	// implementation 'org.springframework.modulith:spring-modulith-starter-core'
-	// implementation 'org.springframework.modulith:spring-modulith-starter-jpa'
+	
 
 	annotationProcessor 'org.projectlombok:lombok'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
-	// https://mvnrepository.com/artifact/org.json/json
 	implementation group: 'org.json', name: 'json', version: '20200518'
 
 
@@ -51,7 +49,6 @@ dependencies {
 	implementation "org.springframework.boot:spring-boot-starter-security"
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	//testImplementation 'org.springframework.modulith:spring-modulith-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 

@@ -10,3 +10,4 @@ public interface OauthMemberRepository extends JpaRepository<OauthMember, Long> 
     Optional<OauthMember> findByOauthId(OauthId oauthId);
     Optional<OauthMember> findById(Long id);
 }
+  

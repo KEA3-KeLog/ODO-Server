@@ -14,4 +14,4 @@ public class PostTagService {
     public List<PostTagRepository.TagCountDTO> countTagsByUserId(Long userId) {
         return postTagRepository.countTagsByUserId(userId);
     }
-}
+} 

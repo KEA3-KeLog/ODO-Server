@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class KakaoMemberClient implements OauthMemberClient {
     private final KakaoApiClient kakaoApiClient;
     private final KakaoOauthConfig kakaoOauthConfig;
-
+ 
     @Override
     public OauthServerType supportServer() {
         return OauthServerType.KAKAO;

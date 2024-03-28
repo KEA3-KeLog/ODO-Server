@@ -17,3 +17,4 @@ public interface NaverApiClient {
     @GetExchange("https://openapi.naver.com/v1/nid/me")
     NaverMemberResponse fetchMember(@RequestHeader(name = AUTHORIZATION) String bearerToken);
 }
+ 

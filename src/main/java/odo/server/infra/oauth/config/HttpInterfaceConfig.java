@@ -15,7 +15,7 @@ public class HttpInterfaceConfig {
     public KakaoApiClient kakaoApiClient() {
         return createHttpInterface(KakaoApiClient.class);
     }
-
+ 
     @Bean
     public NaverApiClient naverApiClient() {
         return createHttpInterface(NaverApiClient.class);

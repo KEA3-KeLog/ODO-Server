@@ -5,12 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
+ 
 @Service
 public class CommentService {
-
+ 
     @Autowired
-    private CommentRepository commentRepository;
+    private CommentR epository commentRepository;
 
     public List<Comment> getCommentByPostId(Integer PostId) {
         return commentRepository.findAllByPostId(PostId);

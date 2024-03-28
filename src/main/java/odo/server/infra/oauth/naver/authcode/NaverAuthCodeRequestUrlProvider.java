@@ -15,7 +15,7 @@ public class NaverAuthCodeRequestUrlProvider implements AuthCodeRequestUrlProvid
     @Override
     public OauthServerType supportServer() {
         return OauthServerType.NAVER;
-    }
+    } 
 
     @Override
     public String provide() {

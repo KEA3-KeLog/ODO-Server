@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class StoreController {
     @Autowired
     private UserPointRepository userPointRepository;
-
+ 
     @Autowired
     private ItemRepository itemRepository;
 

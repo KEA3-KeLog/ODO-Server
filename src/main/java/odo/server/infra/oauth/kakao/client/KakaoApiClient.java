@@ -24,3 +24,4 @@ public interface KakaoApiClient {
     @GetExchange("https://kapi.kakao.com/v2/user/me")
     KakaoMemberResponse fetchMember(@RequestHeader(name = AUTHORIZATION) String bearerToken);
 }
+ 

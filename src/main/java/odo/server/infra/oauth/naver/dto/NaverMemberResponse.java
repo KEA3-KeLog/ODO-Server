@@ -20,7 +20,7 @@ public record NaverMemberResponse(
                 .nickname(response.nickname)
                 .profileImageUrl(response.profileImage)
                 .build();
-    }
+    } 
 
     @JsonNaming(value = SnakeCaseStrategy.class)
     public record Response(

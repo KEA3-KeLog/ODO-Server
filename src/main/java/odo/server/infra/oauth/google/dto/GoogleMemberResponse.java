@@ -23,5 +23,5 @@ public record GoogleMemberResponse(
                 .email(email)
                 .build();
     }
-
+ 
 }
